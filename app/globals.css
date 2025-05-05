@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -8,7 +8,7 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 html,
 body {
@@ -39,4 +39,105 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+
+/* --- */
+:root {
+  --primary-color: #f2a155;
+  --secondary-color: #002341;
+  --primary-color-dark: #e58a34
+}
+
+.navbar-nav .nav-link {
+  transition: color 0.3s ease-in-out;
+}
+
+/* Hover effect: change to primary color */
+.navbar-nav .nav-link:hover {
+  color: var(--primary-color) !important;
+}
+.bg-custom-secondary {
+  background-color: var(--secondary-color);
+}
+
+.primary-color-custom {
+  color: var(--primary-color);
+}
+.primary-color-dark {
+  color: var(--primary-color-dark);
+}
+
+.bg-custom-primary {
+  background-color: var(--primary-color);
+}
+
+.bg-custom-primary:hover {
+  background-color: #e58a34;
+}
+
+/* Custom toggler icon color */
+.navbar-toggler {
+  border: none;
+}
+
+/* Hide dropdown by default */
+.custom-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 200px;
+  padding: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+/* Show custom dropdown on hover */
+.nav-item.dropdown:hover .custom-dropdown {
+  display: block;
+}
+
+/* Style dropdown items */
+.custom-dropdown .dropdown-item {
+  color: #000;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+}
+
+.custom-dropdown .dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Show dropdown on hover for desktop */
+@media (min-width: 768px) {
+  .navbar .dropdown:hover > .dropdown-menu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    margin-top: 0;
+  }
+
+  .navbar .dropdown .dropdown-menu {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    margin-top: 0;
+  }
+
+  .navbar .dropdown:hover .dropdown-menu:hover {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* General dropdown padding */
+.navbar .dropdown-menu {
+  margin-top: 0;
+  padding: 0.5rem 0;
 }
