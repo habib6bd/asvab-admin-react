@@ -141,3 +141,275 @@ a {
   margin-top: 0;
   padding: 0.5rem 0;
 }
+
+/* Homepage Hero section */
+.bg-hero {
+  background-image: url('/images/asvab-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.bg-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+.bg-custom-dark {
+  background-color: var(--secondary-color);
+}
+.btn-primary-custom {
+  background-color: #f2a155;
+  color: #fff;
+  transition: background-color 0.3s ease-in-out;
+}
+.btn-primary-custom:hover {
+  color: #fff;
+  background-color: #e58a34;
+}
+/* Hero section end */
+
+/* Top Courses Section */
+.bg-dark-blue {
+  background-color: var(--secondary-color);
+}
+
+.hover-lift {
+  transition: transform 0.3s ease-in-out;
+}
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+.btn-secondary-custom {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;;
+  border: 1px solid var(--secondary-color);
+}
+.btn-secondary-custom:hover {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+/* Top Courses Section End*/
+
+
+/* Meet Our Teachers Section*/
+.text-primary {
+  color: var(--secondary-color) !important;
+}
+/* Meet Our Teachers Section End*/
+
+/* FAQ section accordion */
+.accordion-button.custom-bg {
+  background-color: var(--secondary-color) !important;
+  color: white !important;
+  position: relative;
+}
+
+.accordion-button::after {
+  display: none !important;
+}
+
+.accordion-icon {
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.accordion-button.collapsed .icon-down {
+  display: inline;
+}
+
+.accordion-button:not(.collapsed) .icon-up {
+  display: inline;
+}
+
+.icon-up,
+.icon-down {
+  display: none;
+}
+/* FAQ section accordion End*/
+
+/*Slide Testimonial-section */
+.testimonial-section {
+  background: url('/images/review_bg-1.jpg') center/cover no-repeat;
+  padding: 4rem 1rem;
+}
+
+.quote-icon {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.testimonial-text,
+.testimonial-author span {
+  color: #1f2937; /* text-gray-800 */
+}
+
+.carousel-indicators {
+  position: static;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #d1d5db; /* gray-300 */
+  border: 1px solid transparent;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.carousel-indicators .active {
+  background-color: var(--primary-color);
+}
+.quote-close {
+  transform: rotate(180deg);
+  display: inline-block;
+}
+/*Slide Testimonial-section End*/
+
+/* Footer Section Start*/
+.footer-link,
+  .footer-icon {
+    transition: color 0.3s ease-in-out;
+  }
+
+  .footer-link:hover,
+  .footer-icon:hover {
+    color: var(--primary-color) !important;
+  }
+
+  /* Featured Links */
+.footer-link {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-link:hover {
+  color: var(--primary-color);
+}
+
+/* Read More Link */
+.read-more-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.read-more-link:hover {
+  color: white;
+}
+/* Footer Section End*/
+
+/* Common Banner */
+.banner {
+  height: 16rem;
+  background-image: url("/images/about-hero.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.banner h1 {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 2rem;
+}
+@media (min-width: 768px) {
+  .banner h1 {
+    font-size: 3rem;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+
+/* Base tab styling */
+.nav-link.primary-color-custom {
+  color: var(--primary-color-dark);
+  border-radius: 5px;
+  margin-right: 5px;
+  /* transition: background-color 0.6s ease; */
+  transition: all 0.5s ease-in-out;
+}
+
+/* Hover effect */
+.nav-link.primary-color-custom:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+/* Active tab styling (selected tab) */
+.nav-link.primary-color-custom.active {
+  background-color: var(--primary-color-dark) !important;
+  color: #fff !important;
+  border-color: var(--primary-color-dark);
+}
+.social-icon {
+  transition: all 0.3s ease-in-out ;
+}
+.social-icon:hover {
+  color: var(--secondary-color);
+}
+
+
+.question-number {
+  color: #fff;
+  background-color: #888;
+  font-weight: bold;
+  font-size: 1.1rem;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 2px 3px 4px #999;
+}
+.question-title {
+  color: #666;
+}
+
+/* Login section */
+.login-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 15px;
+}
+
+.login-card {
+  max-width: 500px;
+  width: 100%;
+  border: none;
+  border-radius: 1rem;
+ 
+}
+
+.form-control {
+  border-radius: 0.5rem;
+}
+
+@media (min-height: 600px) {
+  .login-container {
+    align-items: center;
+  }
+}
+

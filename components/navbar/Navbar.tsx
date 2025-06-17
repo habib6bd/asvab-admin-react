@@ -74,18 +74,17 @@ export default function Navbar() {
 
               {/* Dropdown */}
               <li className="nav-item dropdown position-relative">
-                <a
+                <Link href="/service"
                   className="nav-link text-white d-flex align-items-center gap-1"
-                  href="service.html"
                   id="servicesDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   SERVICES <FaCaretDown className="fs-4" />
-                </a>
+                </Link>
                 <ul className="dropdown-menu mt-0" aria-labelledby="servicesDropdown">
-                  <li><Link className="dropdown-item" href="asvab.html">ASVAB</Link></li>
+                  <li><Link  className="dropdown-item" href="asvab.html">ASVAB</Link></li>
                   <li><Link className="dropdown-item" href="astb.html">ASTB</Link></li>
                   <li><Link className="dropdown-item" href="oar.html">OAR</Link></li>
                   <li><Link className="dropdown-item" href="afoqt.html">AFOQT</Link></li>
