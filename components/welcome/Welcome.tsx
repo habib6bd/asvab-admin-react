@@ -1,8 +1,94 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
+interface State {
+  id: string;
+  name: string;
+}
+
 export default function Welcome() {
+  const [states, setStates] = useState<State[]>([]);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    state_id: "",
+    message: "",
+  });
+  const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    const fetchStates = async () => {
+      try {
+        const formData = new FormData();
+        formData.append("action", "get-state-list");
+
+        const res = await fetch("/api/proxy", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await res.json();
+
+        if (Array.isArray(data)) {
+          setStates(data);
+          console.log('Fetched states:', data);
+        } else {
+          console.error("API returned invalid data", data);
+        }
+      } catch (error) {
+        console.error("Fetching states failed:", error);
+      }
+    };
+
+    fetchStates();
+  }, []);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+
+    const formData = new FormData();
+    formData.append("action", "tutor-request");
+    formData.append("name", form.name);
+    formData.append("email", form.email);
+    formData.append("phone", form.phone);
+    formData.append("state_id", form.state_id);
+    formData.append("message", form.message);
+
+    try {
+      const res = await fetch("/api/proxy", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (data?.isSuccess) {
+        alert("Tutor request submitted successfully!");
+        setForm({ name: "", email: "", phone: "", state_id: "", message: "" });
+      } else {
+        alert(data.message || "Submission failed");
+      }
+    } catch (error) {
+      alert("Something went wrong.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -16,8 +102,7 @@ export default function Welcome() {
                 <span className="primary-color-custom">ASVAB Tutoring</span>
               </h1>
               <p className="lead mt-3">
-                10,000+ successful candidates. Online Test Prep for the ASVAB,
-                ASTB, OAR, AFOQT, and SIFT.
+                10,000+ successful candidates. Online Test Prep for the ASVAB, ASTB, OAR, AFOQT, and SIFT.
               </p>
               <button className="btn btn-primary-custom mt-3">ENROLL NOW</button>
 
@@ -38,37 +123,79 @@ export default function Welcome() {
             <div className="col-lg-6">
               <div className="bg-custom-dark p-4 rounded shadow text-white">
                 <h2 className="text-center mb-4">REQUEST A TUTOR NOW!</h2>
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label className="form-label">Name</label>
-                    <input type="text" className="form-control" placeholder="Name" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Name"
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      required
+                    />
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Email (Use your valid email address)</label>
-                    <input type="email" className="form-control" placeholder="Email" />
+                    <input
+                      type="email"
+                      className="form-control"
+                      placeholder="Email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      required
+                    />
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Phone (US Only)</label>
-                    <input type="tel" className="form-control" placeholder="Phone" />
+                    <input
+                      type="tel"
+                      className="form-control"
+                      placeholder="Phone"
+                      name="phone"
+                      value={form.phone}
+                      onChange={handleChange}
+                      required
+                    />
                   </div>
                   <div className="mb-3">
                     <label className="form-label">State</label>
-                    <select className="form-select">
+                    <select
+                      className="form-select"
+                      name="state_id"
+                      value={form.state_id}
+                      onChange={handleChange}
+                      required
+                    >
                       <option value="">—Please choose an option—</option>
-                      <option value="CA">California</option>
-                      <option value="TX">Texas</option>
+                      {states.map((state) => (
+                        <option key={state.id} value={state.id}>
+                          {state.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Message</label>
-                    <textarea className="form-control" rows={4}></textarea>
+                    <textarea
+                      className="form-control"
+                      rows={4}
+                      name="message"
+                      value={form.message}
+                      onChange={handleChange}
+                    />
                   </div>
-                  <button type="submit" className="btn btn-primary-custom w-50 d-block mx-auto mt-4">
-                    Submit
+                  <button
+                    type="submit"
+                    className="btn btn-primary-custom w-50 d-block mx-auto mt-4"
+                    disabled={submitting}
+                  >
+                    {submitting ? "Submitting..." : "Submit"}
                   </button>
                 </form>
 
-                {/* App Download Icons */}
                 <div className="d-flex justify-content-center gap-3 mt-4">
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
@@ -104,18 +231,10 @@ export default function Welcome() {
             </h2>
           </div>
           <p className="mt-4 text-muted fs-5">
-            Need help with the ASVAB? We are here for you. No longer do you need
-            to prove yourself as a good student by memorizing whole subjects.
-            Now you only need to learn the techniques to excel in your field.
-            ASVAB tutoring provides you with the one-stop solution to help
-            establish your career in the Armed Forces. ASVAB Tutoring was
-            established in 2012 by a group of adroit engineers to simplify and
-            streamline the learning process.
+            Need help with the ASVAB? We are here for you. No longer do you need to prove yourself as a good student by memorizing whole subjects...
           </p>
           <div className="text-center">
-            <button className="btn btn-primary-custom mt-4 px-5 py-2">
-              READ MORE
-            </button>
+            <button className="btn btn-primary-custom mt-4 px-5 py-2">READ MORE</button>
           </div>
         </div>
       </section>

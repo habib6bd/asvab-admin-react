@@ -10,35 +10,38 @@ export default function LoginPage() {
     const [password, setPassword] = useState('*&$@!asvab3372008');
     const [error, setError] = useState('');
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setError('');
+const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
 
-        const formData = new URLSearchParams();
-        formData.append('action', 'admin-login');
-        formData.append('username', username);
-        formData.append('password', password);
+    const formData = new URLSearchParams();
+    formData.append('action', 'admin-login');
+    formData.append('username', username);
+    formData.append('password', password);
 
-        try {
-            const response = await fetch('/api/login', {
-                method: 'POST',
-                body: formData,
-            });
+    try {
+        const response = await fetch('/api/proxy', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData,
+        });
 
+        const result = await response.json();
 
-            const result = await response.json();
-
-            if (result.status === 200 && result.isSuccess) {
-                Cookies.set('admin-auth', 'true', { expires: 1 });
-                router.push('/admin');
-            } else {
-                setError('Invalid username or password. Please try again.');
-            }
-
-        } catch (err) {
-            setError('Something went wrong. Please try again later.');
+        if (result.status === 200 && result.isSuccess) {
+            Cookies.set('admin-auth', 'true', { expires: 1 });
+            router.push('/admin');
+        } else {
+            setError('Invalid username or password. Please try again.');
         }
-    };
+
+    } catch (err) {
+        setError('Something went wrong. Please try again later.');
+    }
+};
+
 
     return (
         <section className="login-container py-5">
