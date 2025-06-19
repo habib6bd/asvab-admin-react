@@ -1,4 +1,5 @@
 'use client';
+import Image from "next/image";
 import { useEffect } from 'react';
 
 export default function Faq() {
@@ -13,9 +14,11 @@ export default function Faq() {
         <div className="text-center mb-4 position-relative">
           <h2 className="fw-bold display-6 d-inline-block pb-3 position-relative text-dark" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>
             Frequently Asked Questions
-            <img
+            <Image
               src="/images/border_v1.png"
               alt="underline"
+               width={160}
+                height={8}
               className="position-absolute start-50 translate-middle-x bottom-0"
               style={{ height: '8px', width: '160px', objectFit: 'cover' }}
             />

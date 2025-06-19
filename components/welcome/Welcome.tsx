@@ -42,8 +42,8 @@ export default function Welcome() {
         } else {
           console.error("API returned invalid data", data);
         }
-      } catch (error) {
-        console.error("Fetching states failed:", error);
+      } catch {
+
       }
     };
 
@@ -83,7 +83,7 @@ export default function Welcome() {
         alert(data.message || "Submission failed");
       }
     } catch (error) {
-      alert("Something went wrong.");
+      console.error(error);
     } finally {
       setSubmitting(false);
     }
@@ -197,15 +197,17 @@ export default function Welcome() {
                 </form>
 
                 <div className="d-flex justify-content-center gap-3 mt-4">
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                  <Image
+                    src="/images/Google_Play_Store_badge_EN.svg"
                     alt="Google Play"
-                    height="40"
+                    width={180}
+                    height={40}
                   />
-                  <img
-                    src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                  <Image
+                    src="/images/download-on-the-app-store.svg"
                     alt="App Store"
-                    height="40"
+                    width={180}
+                    height={40}
                   />
                 </div>
               </div>

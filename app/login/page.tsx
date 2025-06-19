@@ -38,7 +38,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         }
 
     } catch (err) {
-        setError('Something went wrong. Please try again later.');
+        console.error(err);
     }
 };
 

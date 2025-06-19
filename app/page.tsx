@@ -1,5 +1,4 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+
 import Welcome from "@/components/welcome/Welcome";
 import TopCourses from "@/components/topcourses/Topcourses";
 import Teachers from "@/components/teachers/Teachers";
