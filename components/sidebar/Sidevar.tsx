@@ -7,7 +7,10 @@ import { useState, useEffect } from 'react';
 const menuItems = [
   {
     title: 'Dashboard',
-    children: [{ label: 'Dashboard Overview', href: '/admin' }],
+    children: [
+      { label: 'View Tutor Request', href: '/admin/tutor-request' },
+      { label: 'Add new content', href: '/admin/add-content' },
+    ],
   },
   {
     title: 'Content Management',
